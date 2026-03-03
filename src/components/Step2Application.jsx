@@ -83,7 +83,7 @@ export default function Step2Application({ data, update, onSubmit }) {
       {/* ─── Header + stepper ─── */}
       <header className="px-6 py-5 max-w-[700px] mx-auto">
         <div className="flex items-center justify-between mb-6">
-          <div className="text-[24px] font-display tracking-[4px] text-accent">WEYOND</div>
+          <img src="/logo-weyond.png" alt="WEYOND" className="h-7" />
         </div>
 
         <div className="flex items-center gap-2 mb-2">
@@ -294,7 +294,7 @@ export default function Step2Application({ data, update, onSubmit }) {
 
       {/* ─── Footer ─── */}
       <footer className="bg-black border-t border-border py-8 px-6 text-center">
-        <div className="font-display text-[20px] tracking-[3px] text-accent mb-2">WEYOND</div>
+        <img src="/logo-weyond.png" alt="WEYOND" className="h-5 mx-auto mb-2" />
         <p className="text-[11px] text-subtle font-sans">
           Le Partenaire Carrière des Coachs Sportifs · © 2024 WEYOND · Mentions légales
         </p>

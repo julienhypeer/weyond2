@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import Button from './ui/Button'
 import TestimonialCard from './ui/TestimonialCard'
 import {
@@ -12,8 +13,18 @@ import {
 } from '../data/content'
 
 export default function Step1Landing({ data, update, onNext }) {
+  useEffect(() => {
+    if (!document.querySelector('script[src*="player.vimeo.com/api"]')) {
+      const s = document.createElement('script')
+      s.src = 'https://player.vimeo.com/api/player.js'
+      s.async = true
+      document.body.appendChild(s)
+    }
+  }, [])
+
   const handleSubmit = (e) => {
     e.preventDefault()
+    if (!data.coach_presentiel || data.coach_presentiel !== 'oui') return
     if (!data.prenom || !data.nom || !data.email || !data.tel) return
     onNext()
   }
@@ -32,7 +43,7 @@ export default function Step1Landing({ data, update, onNext }) {
 
       {/* ─── 2. Header ─── */}
       <header className="flex items-center justify-between px-6 py-5 max-w-[900px] mx-auto">
-        <div className="text-[28px] font-display tracking-[4px] text-accent">WEYOND</div>
+        <img src="/logo-weyond.png" alt="WEYOND" className="h-8" />
         <div className="text-[10px] font-semibold tracking-[0.08em] text-muted border border-border rounded-full py-1.5 px-3.5 font-sans hidden sm:block">
           Organisme de formation certifié ✦ 2024
         </div>
@@ -56,6 +67,18 @@ export default function Step1Landing({ data, update, onNext }) {
             MAIS TON AGENDA<br />
             <span className="text-accent drop-shadow-[0_0_24px_rgba(150,144,94,0.3)]">EST ENCORE VIDE.</span>
           </h1>
+
+          <div className="max-w-[700px] mx-auto mb-10 animate-fadeinup-d2">
+            <div className="relative rounded-lg border border-border overflow-hidden shadow-glow" style={{ paddingBottom: '56.25%' }}>
+              <iframe
+                src="https://player.vimeo.com/video/1103193348?h=e48403fd13&badge=0&autopause=0&player_id=0&app_id=58479"
+                frameBorder="0"
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                className="absolute inset-0 w-full h-full"
+                title="WEYOND Mentorat"
+              />
+            </div>
+          </div>
 
           <p className="font-serif italic text-[clamp(18px,2.5vw,24px)] text-muted leading-relaxed max-w-[620px] mx-auto mb-10 animate-fadeinup-d2">
             Pendant que d'autres coachs aussi bons que toi remplissent leur planning, toi tu cherches encore. Le
@@ -266,6 +289,37 @@ export default function Step1Landing({ data, update, onNext }) {
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-4 relative">
+              {/* ─── Question de qualification ─── */}
+              <div>
+                <label className="block text-[12px] font-semibold uppercase tracking-[0.1em] text-muted mb-2.5 font-sans">
+                  Es-tu coach sportif en présentiel ? *
+                </label>
+                <div className="flex gap-3">
+                  {['oui', 'non'].map((val) => (
+                    <button
+                      key={val}
+                      type="button"
+                      onClick={() => update('coach_presentiel', val)}
+                      className={`flex-1 py-[12px] px-4 rounded border text-[14px] font-semibold font-sans transition-all duration-300 cursor-pointer ${
+                        data.coach_presentiel === val
+                          ? 'bg-accent/15 border-accent text-accent shadow-[0_0_12px_rgba(150,144,94,0.15)]'
+                          : 'bg-card border-border text-muted hover:border-accent/50'
+                      }`}
+                    >
+                      {val === 'oui' ? 'Oui' : 'Non'}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {data.coach_presentiel === 'non' ? (
+                <div className="bg-surface border border-border rounded-xl p-6 text-center">
+                  <p className="text-[15px] text-muted font-sans leading-relaxed">
+                    Ce mentorat est réservé aux coachs sportifs qui exercent en présentiel. Si c'est ton cas à l'avenir, reviens nous voir !
+                  </p>
+                </div>
+              ) : (
+              <>
               <div>
                 <label htmlFor="prenom" className="block text-[12px] font-semibold uppercase tracking-[0.1em] text-muted mb-1.5 font-sans">
                   Prénom *
@@ -296,6 +350,8 @@ export default function Step1Landing({ data, update, onNext }) {
                   → Je candidate au mentorat gratuit
                 </Button>
               </div>
+              </>
+              )}
             </form>
 
             <p className="text-[11px] text-subtle text-center mt-4 font-sans leading-relaxed">
@@ -308,7 +364,7 @@ export default function Step1Landing({ data, update, onNext }) {
 
       {/* ─── 10. Footer ─── */}
       <footer className="bg-black border-t border-border py-8 px-6 text-center">
-        <div className="font-display text-[20px] tracking-[3px] text-accent mb-2">WEYOND</div>
+        <img src="/logo-weyond.png" alt="WEYOND" className="h-5 mx-auto mb-2" />
         <p className="text-[11px] text-subtle font-sans">
           Le Partenaire Carrière des Coachs Sportifs · © 2024 WEYOND · Mentions légales
         </p>

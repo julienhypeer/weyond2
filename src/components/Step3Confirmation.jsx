@@ -23,7 +23,7 @@ export default function Step3Confirmation() {
         {/* Background glow */}
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-accent/[0.04] rounded-full blur-[100px] pointer-events-none" />
 
-        <div className="font-display text-[24px] tracking-[4px] text-accent mb-10 relative">WEYOND</div>
+        <img src="/logo-weyond.png" alt="WEYOND" className="h-7 mx-auto mb-10 relative" />
 
         <svg width="84" height="84" viewBox="0 0 84 84" className="mx-auto mb-8 relative drop-shadow-[0_0_20px_rgba(150,144,94,0.3)]">
           <circle
@@ -167,7 +167,7 @@ export default function Step3Confirmation() {
 
       {/* ─── 6. Footer ─── */}
       <footer className="bg-black border-t border-border py-8 px-6 text-center">
-        <div className="font-display text-[20px] tracking-[3px] text-accent mb-2">WEYOND</div>
+        <img src="/logo-weyond.png" alt="WEYOND" className="h-5 mx-auto mb-2" />
         <p className="text-[12px] text-muted font-sans mb-1">Le Partenaire Carrière des Coachs Sportifs</p>
         <p className="text-[11px] text-subtle font-sans">
           © 2024 WEYOND · Organisme de formation certifié · Mentions légales

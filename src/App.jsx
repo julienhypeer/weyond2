@@ -7,6 +7,7 @@ export default function App() {
   const [step, setStep] = useState(0)
   const [formData, setFormData] = useState({
     // Step 1 — Optin
+    coach_presentiel: '',
     prenom: '',
     nom: '',
     email: '',
