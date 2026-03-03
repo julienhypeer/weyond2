@@ -80,7 +80,7 @@ export default function Step1Landing({ data, update, onNext }) {
             </div>
           </div>
 
-          <p className="text-[13px] text-muted tracking-[0.08em] font-sans mb-4 animate-fadeinup">
+          <p className="text-[clamp(20px,3vw,28px)] text-muted tracking-[0.04em] font-sans mb-4 animate-fadeinup">
             Pour les coachs sportifs en présentiel — à domicile ou en salle
           </p>
 
