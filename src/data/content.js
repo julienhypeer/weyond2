@@ -172,9 +172,4 @@ export const formOptions = {
     { value: '6mois', label: 'Dans 6 mois' },
     { value: '1an', label: "Dans l'année" },
   ],
-  disponibilite_zoom: [
-    { value: 'oui', label: "Oui, je peux m'organiser" },
-    { value: 'oui_planifier', label: "Oui, mais j'ai besoin de planifier à l'avance" },
-    { value: 'pas_sur', label: 'Pas encore sûr(e)' },
-  ],
 }

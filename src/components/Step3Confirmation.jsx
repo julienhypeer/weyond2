@@ -1,8 +1,14 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { confirmationSteps, prepActions } from '../data/content'
 
 export default function Step3Confirmation() {
   const [copied, setCopied] = useState(false)
+
+  useEffect(() => {
+    if (typeof window.fbq === 'function') {
+      window.fbq('track', 'CompleteRegistration')
+    }
+  }, [])
 
   const shareText = encodeURIComponent(
     "Hey ! J'ai découvert un mentorat business gratuit de 3 jours pour les coachs sportifs. C'est en individuel, sur Zoom, et c'est limité à 6 places. Jette un œil : " +

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Button from './ui/Button'
 import RadioGroup from './ui/RadioGroup'
 import CheckboxGroup from './ui/CheckboxGroup'
@@ -38,6 +38,12 @@ function StepDot({ done, active, label }) {
 export default function Step2Application({ data, update, onSubmit }) {
   const [submitting, setSubmitting] = useState(false)
   const [emailError, setEmailError] = useState('')
+
+  useEffect(() => {
+    if (typeof window.fbq === 'function') {
+      window.fbq('track', 'Lead')
+    }
+  }, [])
 
   const progress = useMemo(() => {
     const filled = REQUIRED.filter((f) => data[f]).length
