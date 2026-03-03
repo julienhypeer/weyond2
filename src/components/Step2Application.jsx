@@ -20,19 +20,19 @@ const REQUIRED = [
 
 function StepDot({ done, active, label }) {
   return (
-    <div className="flex flex-col items-center gap-1">
+    <div className="flex flex-col items-center gap-1.5">
       <div
-        className={`w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold font-sans ${
+        className={`w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold font-sans transition-all duration-300 ${
           done
-            ? 'bg-accent text-black'
+            ? 'bg-accent text-black shadow-[0_0_12px_rgba(150,144,94,0.3)]'
             : active
-              ? 'border-2 border-accent text-accent'
+              ? 'border-2 border-accent text-accent shadow-[0_0_12px_rgba(150,144,94,0.15)]'
               : 'border border-border text-subtle'
         }`}
       >
         {done ? '✓' : label[0]}
       </div>
-      <span className="text-[9px] text-subtle hidden sm:block font-sans">{label}</span>
+      <span className={`text-[9px] hidden sm:block font-sans ${active ? 'text-accent font-semibold' : 'text-subtle'}`}>{label}</span>
     </div>
   )
 }
@@ -67,9 +67,9 @@ export default function Step2Application({ data, update, onSubmit }) {
   }
 
   const textareaCls =
-    'w-full py-[13px] px-4 border border-border rounded text-[15px] text-text bg-card outline-none transition-all duration-200 font-sans placeholder:text-subtle focus:border-accent focus:shadow-[0_0_0_3px_rgba(150,144,94,0.15)] resize-y min-h-[100px]'
+    'w-full py-[13px] px-4 border border-border rounded text-[15px] text-text bg-card outline-none transition-all duration-300 font-sans placeholder:text-subtle focus:border-accent focus:shadow-[0_0_0_3px_rgba(150,144,94,0.15)] focus:bg-surface resize-y min-h-[100px]'
   const inputCls =
-    'w-full py-[14px] px-4 border border-border rounded text-[15px] text-text bg-card outline-none transition-all duration-200 font-sans placeholder:text-subtle focus:border-accent focus:shadow-[0_0_0_3px_rgba(150,144,94,0.15)]'
+    'w-full py-[14px] px-4 border border-border rounded text-[15px] text-text bg-card outline-none transition-all duration-300 font-sans placeholder:text-subtle focus:border-accent focus:shadow-[0_0_0_3px_rgba(150,144,94,0.15)] focus:bg-surface'
 
   return (
     <div className="min-h-screen bg-black text-text">
@@ -82,20 +82,20 @@ export default function Step2Application({ data, update, onSubmit }) {
 
       {/* ─── Header + stepper ─── */}
       <header className="px-6 py-5 max-w-[700px] mx-auto">
-        <div className="flex items-center justify-between mb-5">
+        <div className="flex items-center justify-between mb-6">
           <div className="text-[24px] font-display tracking-[4px] text-accent">WEYOND</div>
         </div>
 
         <div className="flex items-center gap-2 mb-2">
           <StepDot done label="Coordonnées" />
-          <div className="flex-1 h-[2px] bg-accent" />
+          <div className="flex-1 h-[2px] bg-accent rounded-full" />
           <StepDot active label="Candidature" />
-          <div className="flex-1 h-[2px] bg-border" />
+          <div className="flex-1 h-[2px] bg-border rounded-full" />
           <StepDot label="Confirmation" />
         </div>
 
-        <div className="w-full h-[3px] bg-surface rounded-full overflow-hidden mt-3">
-          <div className="h-full bg-accent transition-all duration-500 rounded-full" style={{ width: `${progress}%` }} />
+        <div className="w-full h-[3px] bg-surface rounded-full overflow-hidden mt-4">
+          <div className="h-full bg-accent transition-all duration-500 rounded-full shadow-[0_0_8px_rgba(150,144,94,0.4)]" style={{ width: `${progress}%` }} />
         </div>
         <p className="text-[11px] text-subtle mt-1.5 font-sans">{progress}% complété</p>
       </header>
@@ -113,13 +113,13 @@ export default function Step2Application({ data, update, onSubmit }) {
             bonne ou mauvaise réponse. Juste de l'honnêteté.
           </p>
 
-          <div className="flex items-center justify-center gap-4 max-[480px]:gap-2 mb-8">
+          <div className="flex items-center justify-center gap-6 sm:gap-8 mb-8">
             {[
               { icon: '📋', label: 'Candidature' },
               { icon: '📞', label: 'Appel' },
               { icon: '🎯', label: 'Mentorat' },
             ].map((s, i) => (
-              <div key={i} className="flex items-center gap-4 max-[480px]:gap-2">
+              <div key={i} className="flex items-center gap-6 sm:gap-8">
                 {i > 0 && <div className="text-subtle text-[14px]">→</div>}
                 <div className="text-center">
                   <div className="text-[24px] mb-1">{s.icon}</div>
@@ -132,7 +132,7 @@ export default function Step2Application({ data, update, onSubmit }) {
       </section>
 
       {/* ─── Vidéo ─── */}
-      <section className="bg-deep py-12 px-6">
+      <section className="bg-deep py-14 px-6">
         <div className="max-w-[700px] mx-auto">
           <h2 className="font-serif text-[clamp(22px,3.5vw,30px)] text-center italic mb-2">
             Avant de remplir le formulaire — regarde ça.
@@ -141,7 +141,7 @@ export default function Step2Application({ data, update, onSubmit }) {
             Cette vidéo t'explique exactement comment fonctionnent les 3 jours et ce qu'on va faire ensemble.
           </p>
 
-          <div className="relative rounded-lg border border-border overflow-hidden" style={{ paddingBottom: '56.25%' }}>
+          <div className="relative rounded-lg border border-border overflow-hidden shadow-premium" style={{ paddingBottom: '56.25%' }}>
             <div className="absolute inset-0 bg-card flex flex-col items-center justify-center">
               <svg width="64" height="64" viewBox="0 0 64 64" fill="none" className="mb-3 opacity-60">
                 <circle cx="32" cy="32" r="31" stroke="#96905e" strokeWidth="2" />
@@ -158,9 +158,9 @@ export default function Step2Application({ data, update, onSubmit }) {
       </section>
 
       {/* ─── Formulaire ─── */}
-      <section className="bg-black py-12 px-6">
+      <section className="bg-black py-14 px-6">
         <div className="max-w-[700px] mx-auto">
-          <div className="text-center mb-8">
+          <div className="text-center mb-10">
             <h2 className="font-display text-[clamp(28px,4.5vw,44px)] uppercase tracking-[2px] mb-2">
               TON DOSSIER DE CANDIDATURE
             </h2>
@@ -170,13 +170,14 @@ export default function Step2Application({ data, update, onSubmit }) {
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-6">
             {/* ─── Bloc A ─── */}
-            <div className="bg-surface border border-border card-accent rounded-xl p-7">
-              <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-accent mb-6 font-sans">
+            <div className="bg-surface border border-border card-accent rounded-xl p-7 shadow-premium">
+              <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-accent mb-2 font-sans">
                 A — Situation actuelle
               </div>
-              <h3 className="font-serif italic text-[20px] text-text mb-5">Où tu en es aujourd'hui</h3>
+              <div className="separator-gold mb-5" />
+              <h3 className="font-serif italic text-[20px] text-text mb-6">Où tu en es aujourd'hui</h3>
 
               <FormField label="Ton statut actuel" required>
                 <RadioGroup name="statut" options={formOptions.statut} value={data.statut} onChange={(v) => update('statut', v)} columns={1} />
@@ -192,11 +193,12 @@ export default function Step2Application({ data, update, onSubmit }) {
             </div>
 
             {/* ─── Bloc B ─── */}
-            <div className="bg-surface border border-border card-accent rounded-xl p-7">
-              <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-accent mb-6 font-sans">
+            <div className="bg-surface border border-border card-accent rounded-xl p-7 shadow-premium">
+              <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-accent mb-2 font-sans">
                 B — Tes blocages
               </div>
-              <h3 className="font-serif italic text-[20px] text-text mb-5">Ce que tu as déjà essayé</h3>
+              <div className="separator-gold mb-5" />
+              <h3 className="font-serif italic text-[20px] text-text mb-6">Ce que tu as déjà essayé</h3>
 
               <FormField label="Qu'as-tu déjà tenté pour trouver des clients ?">
                 <CheckboxGroup name="deja_essaye" options={formOptions.deja_essaye} values={data.deja_essaye} onChange={(v) => update('deja_essaye', v)} />
@@ -214,11 +216,12 @@ export default function Step2Application({ data, update, onSubmit }) {
             </div>
 
             {/* ─── Bloc C ─── */}
-            <div className="bg-surface border border-border card-accent rounded-xl p-7">
-              <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-accent mb-6 font-sans">
+            <div className="bg-surface border border-border card-accent rounded-xl p-7 shadow-premium">
+              <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-accent mb-2 font-sans">
                 C — Tes objectifs
               </div>
-              <h3 className="font-serif italic text-[20px] text-text mb-5">Où tu veux aller</h3>
+              <div className="separator-gold mb-5" />
+              <h3 className="font-serif italic text-[20px] text-text mb-6">Où tu veux aller</h3>
 
               <FormField label="Chiffre d'affaires cible" required>
                 <RadioGroup name="ca_cible" options={formOptions.ca_cible} value={data.ca_cible} onChange={(v) => update('ca_cible', v)} columns={3} />
@@ -240,11 +243,12 @@ export default function Step2Application({ data, update, onSubmit }) {
             </div>
 
             {/* ─── Bloc D ─── */}
-            <div className="bg-surface border border-border card-accent rounded-xl p-7">
-              <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-accent mb-6 font-sans">
+            <div className="bg-surface border border-border card-accent rounded-xl p-7 shadow-premium">
+              <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-accent mb-2 font-sans">
                 D — Tes disponibilités
               </div>
-              <h3 className="font-serif italic text-[20px] text-text mb-5">Quand es-tu dispo ?</h3>
+              <div className="separator-gold mb-5" />
+              <h3 className="font-serif italic text-[20px] text-text mb-6">Quand es-tu dispo ?</h3>
 
               <FormField label="Peux-tu bloquer 1h par jour pendant 3 jours consécutifs sur Zoom ?" required>
                 <RadioGroup name="disponibilite_zoom" options={formOptions.disponibilite_zoom} value={data.disponibilite_zoom} onChange={(v) => update('disponibilite_zoom', v)} columns={1} />
@@ -273,13 +277,13 @@ export default function Step2Application({ data, update, onSubmit }) {
           </form>
 
           {/* ─── Réassurance ─── */}
-          <div className="grid grid-cols-3 max-[520px]:grid-cols-1 gap-4 mt-10">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-10">
             {[
               { icon: '🔒', text: 'Candidature 100% gratuite — aucune CB demandée' },
               { icon: '📞', text: "Tu seras appelé(e) sous 48h par un expert (pas un commercial)" },
               { icon: '✋', text: "On dit non si on pense pas pouvoir t'aider vraiment" },
             ].map((r, i) => (
-              <div key={i} className="bg-deep border border-border rounded-lg p-4 text-center">
+              <div key={i} className="bg-deep border border-border rounded-lg p-4 text-center shadow-premium">
                 <div className="text-[24px] mb-2">{r.icon}</div>
                 <p className="text-[12px] text-muted font-sans leading-snug">{r.text}</p>
               </div>

@@ -43,8 +43,8 @@ body::before {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.5;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+  opacity: 0.6;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
 }
 
 #root { position: relative; z-index: 1; }
@@ -69,8 +69,26 @@ body::before {
 @utility card-accent { border-left: 3px solid var(--color-accent) !important; }
 @utility card-olive { border-left: 3px solid var(--color-olive) !important; }
 
+/* ─── Premium shadows ─── */
+@utility shadow-premium { box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.2); }
+@utility shadow-premium-lg { box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 4px 16px rgba(0,0,0,0.3); }
+@utility shadow-glow { box-shadow: 0 0 24px rgba(150,144,94,0.15), 0 8px 32px rgba(0,0,0,0.3); }
+@utility shadow-glow-lg { box-shadow: 0 0 40px rgba(150,144,94,0.2), 0 16px 48px rgba(0,0,0,0.4); }
+@utility shadow-glow-cta { box-shadow: 0 0 32px rgba(150,144,94,0.3), 0 8px 24px rgba(150,144,94,0.15); }
+
 /* ─── Gradients ─── */
-@utility gradient-hero { background: linear-gradient(180deg, var(--color-black) 0%, var(--color-deep) 100%); }
+@utility gradient-hero {
+  background: linear-gradient(180deg, var(--color-black) 0%, #1e2222 40%, var(--color-deep) 100%);
+}
+@utility gradient-accent-border {
+  background: linear-gradient(90deg, var(--color-accent-dark), var(--color-accent), var(--color-accent-dark));
+}
+
+/* ─── Separator ─── */
+@utility separator-gold {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-accent-dark), var(--color-accent), var(--color-accent-dark), transparent);
+}
 
 /* ─── Animations ─── */
 @keyframes fadeInUp {
@@ -93,6 +111,18 @@ body::before {
   from { stroke-dashoffset: 80; }
   to   { stroke-dashoffset: 0; }
 }
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
 
 @utility animate-fadeinup { animation: fadeInUp 0.6s ease-out forwards; }
 @utility animate-fadeinup-d1 { animation: fadeInUp 0.6s ease-out 0.1s forwards; opacity: 0; }
@@ -100,3 +130,9 @@ body::before {
 @utility animate-fadeinup-d3 { animation: fadeInUp 0.6s ease-out 0.3s forwards; opacity: 0; }
 @utility animate-pulsebadge { animation: pulseBadge 2s ease-in-out infinite; }
 @utility animate-pulsedot { animation: pulseDot 2s ease-in-out infinite; }
+@utility animate-shimmer {
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+}
+@utility animate-fadein { animation: fadeIn 0.4s ease-out forwards; }
+@utility animate-scalein { animation: scaleIn 0.5s ease-out forwards; }
