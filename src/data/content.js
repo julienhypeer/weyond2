@@ -1,7 +1,7 @@
 // ─── Hero metrics ───
 export const heroMetrics = [
   { num: '700+', label: 'coachs formés' },
-  { num: '3 000–5 000 €/mois', label: 'de revenus atteints' },
+  { num: '3 000–5 000€', label: '/mois — revenus atteints' },
   { num: '3 jours', label: '1h par jour' },
 ]
 

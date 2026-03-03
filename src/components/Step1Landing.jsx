@@ -80,7 +80,11 @@ export default function Step1Landing({ data, update, onNext }) {
             </div>
           </div>
 
-          <h1 className="font-display text-[clamp(48px,8vw,96px)] leading-[0.93] tracking-[2px] mb-6 uppercase animate-fadeinup-d1">
+          <p className="text-[13px] text-muted tracking-[0.08em] font-sans mb-4 animate-fadeinup">
+            Pour les coachs sportifs en présentiel — à domicile ou en salle
+          </p>
+
+          <h1 className="font-display text-[clamp(36px,6vw,72px)] leading-[0.93] tracking-[2px] mb-6 uppercase animate-fadeinup-d1">
             TU SAIS COACHER.<br />
             MAIS TON AGENDA<br />
             <span className="text-accent drop-shadow-[0_0_24px_rgba(150,144,94,0.3)]">EST ENCORE VIDE.</span>
@@ -107,7 +111,7 @@ export default function Step1Landing({ data, update, onNext }) {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-[520px] mx-auto mb-10 animate-fadeinup-d3">
             {heroMetrics.map((m, i) => (
               <div key={i} className="text-center">
-                <div className="text-[clamp(28px,4vw,36px)] font-display text-accent tracking-[1px] drop-shadow-[0_0_16px_rgba(150,144,94,0.25)]">{m.num}</div>
+                <div className="text-[clamp(28px,4vw,36px)] font-display text-accent tracking-[1px] drop-shadow-[0_0_16px_rgba(150,144,94,0.25)] whitespace-nowrap">{m.num}</div>
                 <div className="text-[11px] text-muted mt-1 font-sans">{m.label}</div>
               </div>
             ))}
