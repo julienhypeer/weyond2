@@ -114,9 +114,6 @@ export default function Step1Landing({ data, update, onNext }) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
             {/* PT */}
             <div className="bg-card border border-border card-accent rounded-xl p-7 shadow-premium hover:shadow-glow transition-all duration-300 hover:-translate-y-0.5">
-              <div className="inline-block bg-accent-15 border border-accent-30 text-accent text-[10px] font-bold py-1 px-2.5 rounded-full mb-4 tracking-wide">
-                {targetProfiles.pt.tag}
-              </div>
               <h3 className="font-sans font-bold text-[16px] text-text mb-4">{targetProfiles.pt.title}</h3>
               <ul className="space-y-2.5">
                 {targetProfiles.pt.bullets.map((b, i) => (
@@ -129,9 +126,6 @@ export default function Step1Landing({ data, update, onNext }) {
             </div>
             {/* BPT */}
             <div className="bg-card border border-border card-accent rounded-xl p-7 shadow-premium hover:shadow-glow transition-all duration-300 hover:-translate-y-0.5">
-              <div className="inline-block bg-accent-15 border border-accent-30 text-accent text-[10px] font-bold py-1 px-2.5 rounded-full mb-4 tracking-wide">
-                {targetProfiles.bpt.tag}
-              </div>
               <h3 className="font-sans font-bold text-[16px] text-text mb-4">{targetProfiles.bpt.title}</h3>
               <ul className="space-y-2.5">
                 {targetProfiles.bpt.bullets.map((b, i) => (

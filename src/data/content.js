@@ -8,7 +8,6 @@ export const heroMetrics = [
 // ─── Target profiles ───
 export const targetProfiles = {
   pt: {
-    tag: 'PT indépendant',
     title: "Tu t'es lancé à ton compte",
     bullets: [
       'Tu as entre 0 et 1 500 €/mois de revenus en coaching',
@@ -19,7 +18,6 @@ export const targetProfiles = {
     ],
   },
   bpt: {
-    tag: 'BPT / mi-temps',
     title: 'Tu as encore un pied dans le salariat',
     bullets: [
       'Tu as 3 à 5 clients perso mais tu es bloqué autour de 600–1 000 €/mois',
