@@ -5,7 +5,7 @@ import CheckboxGroup from './ui/CheckboxGroup'
 import FormField from './ui/FormField'
 import { formOptions } from '../data/content'
 
-const WEBHOOK = 'https://hook.eu1.make.com/8pvnqbua7nvts1rk1lrds3our13bjwvb'
+const WEBHOOK = 'https://hook.eu1.make.com/3anb1c10z6ee5otifdy9oiiri5j7u6uh'
 
 const REQUIRED = [
   'statut',
@@ -14,8 +14,6 @@ const REQUIRED = [
   'blocage_principal',
   'ca_cible',
   'delai',
-  'pourquoi_maintenant',
-  'disponibilite_zoom',
 ]
 
 function StepDot({ done, active, label }) {
@@ -39,6 +37,7 @@ function StepDot({ done, active, label }) {
 
 export default function Step2Application({ data, update, onSubmit }) {
   const [submitting, setSubmitting] = useState(false)
+  const [emailError, setEmailError] = useState('')
 
   const progress = useMemo(() => {
     const filled = REQUIRED.filter((f) => data[f]).length
@@ -51,6 +50,15 @@ export default function Step2Application({ data, update, onSubmit }) {
       alert('Merci de répondre à toutes les questions obligatoires.')
       return
     }
+    if (!data.confirm_email) {
+      setEmailError('Merci de confirmer ton email.')
+      return
+    }
+    if (data.confirm_email !== data.email) {
+      setEmailError('Les emails ne correspondent pas.')
+      return
+    }
+    setEmailError('')
     setSubmitting(true)
 
     fetch(WEBHOOK, {
@@ -131,32 +139,6 @@ export default function Step2Application({ data, update, onSubmit }) {
         </div>
       </section>
 
-      {/* ─── Vidéo ─── */}
-      <section className="bg-deep py-14 px-6">
-        <div className="max-w-[700px] mx-auto">
-          <h2 className="font-serif text-[clamp(22px,3.5vw,30px)] text-center italic mb-2">
-            Avant de remplir le formulaire — regarde ça.
-          </h2>
-          <p className="text-[14px] text-muted font-sans text-center mb-6">
-            Cette vidéo t'explique exactement comment fonctionnent les 3 jours et ce qu'on va faire ensemble.
-          </p>
-
-          <div className="relative rounded-lg border border-border overflow-hidden shadow-premium" style={{ paddingBottom: '56.25%' }}>
-            <div className="absolute inset-0 bg-card flex flex-col items-center justify-center">
-              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" className="mb-3 opacity-60">
-                <circle cx="32" cy="32" r="31" stroke="#96905e" strokeWidth="2" />
-                <path d="M26 20L46 32L26 44V20Z" fill="#96905e" />
-              </svg>
-              <p className="text-[13px] text-subtle font-sans">Vidéo de présentation — bientôt disponible</p>
-            </div>
-          </div>
-
-          <p className="font-serif italic text-[15px] text-muted text-center mt-5">
-            Tu as regardé ? Alors tu sais pourquoi c'est différent. Maintenant, dis-nous qui tu es.
-          </p>
-        </div>
-      </section>
-
       {/* ─── Formulaire ─── */}
       <section className="bg-black py-14 px-6">
         <div className="max-w-[700px] mx-auto">
@@ -171,6 +153,20 @@ export default function Step2Application({ data, update, onSubmit }) {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* ─── Confirm email ─── */}
+            <div className="bg-surface border border-border card-accent rounded-xl p-7 shadow-premium">
+              <FormField label="Confirme ton email" required>
+                <input
+                  type="email"
+                  value={data.confirm_email}
+                  onChange={(e) => { update('confirm_email', e.target.value); setEmailError('') }}
+                  placeholder={data.email || 'ton@email.com'}
+                  className={`${inputCls} ${emailError ? 'border-red-500 focus:border-red-500' : ''}`}
+                />
+                {emailError && <p className="text-red-400 text-[12px] mt-1 font-sans">{emailError}</p>}
+              </FormField>
+            </div>
+
             {/* ─── Bloc A ─── */}
             <div className="bg-surface border border-border card-accent rounded-xl p-7 shadow-premium">
               <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-accent mb-2 font-sans">
@@ -229,39 +225,6 @@ export default function Step2Application({ data, update, onSubmit }) {
 
               <FormField label="Délai souhaité" required>
                 <RadioGroup name="delai" options={formOptions.delai} value={data.delai} onChange={(v) => update('delai', v)} columns={3} />
-              </FormField>
-
-              <FormField label="Pourquoi maintenant ?" required>
-                <textarea
-                  value={data.pourquoi_maintenant}
-                  onChange={(e) => update('pourquoi_maintenant', e.target.value)}
-                  placeholder="Qu'est-ce qui fait que tu postules aujourd'hui et pas dans 3 mois ? Sois honnête — c'est cette réponse qui nous aide à savoir si on peut vraiment t'aider."
-                  className={textareaCls}
-                  rows={4}
-                />
-              </FormField>
-            </div>
-
-            {/* ─── Bloc D ─── */}
-            <div className="bg-surface border border-border card-accent rounded-xl p-7 shadow-premium">
-              <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-accent mb-2 font-sans">
-                D — Tes disponibilités
-              </div>
-              <div className="separator-gold mb-5" />
-              <h3 className="font-serif italic text-[20px] text-text mb-6">Quand es-tu dispo ?</h3>
-
-              <FormField label="Peux-tu bloquer 1h par jour pendant 3 jours consécutifs sur Zoom ?" required>
-                <RadioGroup name="disponibilite_zoom" options={formOptions.disponibilite_zoom} value={data.disponibilite_zoom} onChange={(v) => update('disponibilite_zoom', v)} columns={1} />
-              </FormField>
-
-              <FormField label="Quelle semaine te conviendrait ?">
-                <input
-                  type="text"
-                  value={data.semaine_preferee}
-                  onChange={(e) => update('semaine_preferee', e.target.value)}
-                  placeholder="Ex : semaine du 21 juillet, ou : flexible sur juillet"
-                  className={inputCls}
-                />
               </FormField>
             </div>
 

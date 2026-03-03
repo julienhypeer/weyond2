@@ -113,9 +113,13 @@ export default function Step1Landing({ data, update, onNext }) {
             ))}
           </div>
 
-          <a href="#candidature" className="inline-block w-full max-w-[420px]">
+          <button
+            type="button"
+            onClick={() => document.getElementById('candidature')?.scrollIntoView({ behavior: 'smooth' })}
+            className="inline-block w-full max-w-[420px]"
+          >
             <Button>→ Je candidate gratuitement</Button>
-          </a>
+          </button>
         </div>
       </section>
 

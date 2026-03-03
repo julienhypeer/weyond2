@@ -1,10 +1,11 @@
 import { useState } from 'react'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import Step1Landing from './components/Step1Landing'
 import Step2Application from './components/Step2Application'
 import Step3Confirmation from './components/Step3Confirmation'
 
 export default function App() {
-  const [step, setStep] = useState(0)
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     // Step 1 — Optin
     coach_presentiel: '',
@@ -13,7 +14,9 @@ export default function App() {
     nom: '',
     email: '',
     tel: '',
-    // Step 2 — Bloc A
+    // Step 2
+    confirm_email: '',
+    // Bloc A
     statut: '',
     clients_payants: '',
     revenus: '',
@@ -23,14 +26,10 @@ export default function App() {
     // Bloc C
     ca_cible: '',
     delai: '',
-    pourquoi_maintenant: '',
-    // Bloc D
-    disponibilite_zoom: '',
-    semaine_preferee: '',
   })
 
-  const goTo = (s) => {
-    setStep(s)
+  const goTo = (path) => {
+    navigate(path)
     window.scrollTo({ top: 0, behavior: 'instant' })
   }
 
@@ -49,7 +48,11 @@ export default function App() {
     })
   }
 
-  if (step === 0) return <Step1Landing data={formData} update={update} onNext={() => goTo(1)} />
-  if (step === 1) return <Step2Application data={formData} update={update} onSubmit={() => goTo(2)} />
-  return <Step3Confirmation />
+  return (
+    <Routes>
+      <Route path="/" element={<Step1Landing data={formData} update={update} onNext={() => goTo('/candidature')} />} />
+      <Route path="/candidature" element={<Step2Application data={formData} update={update} onSubmit={() => goTo('/confirmation')} />} />
+      <Route path="/confirmation" element={<Step3Confirmation />} />
+    </Routes>
+  )
 }
