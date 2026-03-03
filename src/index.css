@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@theme {
+  --color-black: #1c1f1f;
+  --color-deep: #252929;
+  --color-surface: #2e3232;
+  --color-card: #343838;
+  --color-border: #4a4e4a;
+
+  --color-accent: #96905e;
+  --color-accent-light: #b0a96e;
+  --color-accent-dark: #7a7550;
+
+  --color-olive: #5e5d4a;
+  --color-olive-light: #726f58;
+
+  --color-text: #fefefe;
+  --color-muted: #a8a898;
+  --color-subtle: #6e6e60;
+
+  --color-white: #fefefe;
+  --color-success: #7a9e7e;
+  --color-danger: #c47a5a;
+
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Outfit', system-ui, -apple-system, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-black);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+#root { position: relative; z-index: 1; }
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--color-black); }
+::-webkit-scrollbar-thumb { background: var(--color-olive); border-radius: 3px; }
+
+/* ─── Background utilities ─── */
+@utility bg-accent-5 { background: rgba(150,144,94,0.05); }
+@utility bg-accent-8 { background: rgba(150,144,94,0.08); }
+@utility bg-accent-10 { background: rgba(150,144,94,0.10); }
+@utility bg-accent-12 { background: rgba(150,144,94,0.12); }
+@utility bg-accent-15 { background: rgba(150,144,94,0.15); }
+
+/* ─── Border utilities ─── */
+@utility border-accent-20 { border-color: rgba(150,144,94,0.20); }
+@utility border-accent-30 { border-color: rgba(150,144,94,0.30); }
+@utility border-accent-40 { border-color: rgba(150,144,94,0.40); }
+
+/* ─── Card accents ─── */
+@utility card-accent { border-left: 3px solid var(--color-accent) !important; }
+@utility card-olive { border-left: 3px solid var(--color-olive) !important; }
+
+/* ─── Gradients ─── */
+@utility gradient-hero { background: linear-gradient(180deg, var(--color-black) 0%, var(--color-deep) 100%); }
+
+/* ─── Animations ─── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulseBadge {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(150,144,94,0.4); }
+  50%      { box-shadow: 0 0 0 8px rgba(150,144,94,0); }
+}
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.5; transform: scale(1.5); }
+}
+@keyframes drawCircle {
+  from { stroke-dashoffset: 283; }
+  to   { stroke-dashoffset: 0; }
+}
+@keyframes drawCheck {
+  from { stroke-dashoffset: 80; }
+  to   { stroke-dashoffset: 0; }
+}
+
+@utility animate-fadeinup { animation: fadeInUp 0.6s ease-out forwards; }
+@utility animate-fadeinup-d1 { animation: fadeInUp 0.6s ease-out 0.1s forwards; opacity: 0; }
+@utility animate-fadeinup-d2 { animation: fadeInUp 0.6s ease-out 0.2s forwards; opacity: 0; }
+@utility animate-fadeinup-d3 { animation: fadeInUp 0.6s ease-out 0.3s forwards; opacity: 0; }
+@utility animate-pulsebadge { animation: pulseBadge 2s ease-in-out infinite; }
+@utility animate-pulsedot { animation: pulseDot 2s ease-in-out infinite; }
