@@ -12,6 +12,8 @@ import {
   testimonials,
 } from '../data/content'
 
+const WEBHOOK = 'https://hook.eu1.make.com/8pvnqbua7nvts1rk1lrds3our13bjwvb'
+
 export default function Step1Landing({ data, update, onNext }) {
   useEffect(() => {
     if (!document.querySelector('script[src*="player.vimeo.com/api"]')) {
@@ -25,7 +27,23 @@ export default function Step1Landing({ data, update, onNext }) {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (!data.coach_presentiel || data.coach_presentiel !== 'oui') return
+    if (!data.vu_video) return
     if (!data.prenom || !data.nom || !data.email || !data.tel) return
+
+    fetch(WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        coach_presentiel: data.coach_presentiel,
+        vu_video: data.vu_video,
+        prenom: data.prenom,
+        nom: data.nom,
+        email: data.email,
+        tel: data.tel,
+        submitted_at: new Date().toISOString(),
+      }),
+    }).catch(() => {})
+
     onNext()
   }
 
@@ -296,6 +314,29 @@ export default function Step1Landing({ data, update, onNext }) {
                       onClick={() => update('coach_presentiel', val)}
                       className={`flex-1 py-[12px] px-4 rounded border text-[14px] font-semibold font-sans transition-all duration-300 cursor-pointer ${
                         data.coach_presentiel === val
+                          ? 'bg-accent/15 border-accent text-accent shadow-[0_0_12px_rgba(150,144,94,0.15)]'
+                          : 'bg-card border-border text-muted hover:border-accent/50'
+                      }`}
+                    >
+                      {val === 'oui' ? 'Oui' : 'Non'}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* ─── Question vidéo ─── */}
+              <div>
+                <label className="block text-[12px] font-semibold uppercase tracking-[0.1em] text-muted mb-2.5 font-sans">
+                  As-tu vu la vidéo ? *
+                </label>
+                <div className="flex gap-3">
+                  {['oui', 'non'].map((val) => (
+                    <button
+                      key={val}
+                      type="button"
+                      onClick={() => update('vu_video', val)}
+                      className={`flex-1 py-[12px] px-4 rounded border text-[14px] font-semibold font-sans transition-all duration-300 cursor-pointer ${
+                        data.vu_video === val
                           ? 'bg-accent/15 border-accent text-accent shadow-[0_0_12px_rgba(150,144,94,0.15)]'
                           : 'bg-card border-border text-muted hover:border-accent/50'
                       }`}

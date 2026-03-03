@@ -8,6 +8,7 @@ export default function App() {
   const [formData, setFormData] = useState({
     // Step 1 — Optin
     coach_presentiel: '',
+    vu_video: '',
     prenom: '',
     nom: '',
     email: '',
